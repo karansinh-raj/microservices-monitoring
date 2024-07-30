@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "newsletterreporting.api": "StartDebugging",
+        "newsletter.api": "StartDebugging"
+      }
+    }
+  }
+}
