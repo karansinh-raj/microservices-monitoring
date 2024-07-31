@@ -84,12 +84,15 @@ public static class ServiceCollectionExtensions
 	{
 		services
 			.AddOpenTelemetry()
-			.ConfigureResource(resource => resource.AddService("NewsLetter.Api"))
+			.ConfigureResource(resource => resource.AddService(DiagnosticsConfig.ServiceName))
 			.WithMetrics(metrics =>
 			{
 				metrics
 					.AddAspNetCoreInstrumentation()
 					.AddHttpClientInstrumentation();
+
+				metrics
+					.AddMeter(DiagnosticsConfig.Meter.Name);
 
 				metrics
 					.AddOtlpExporter();
