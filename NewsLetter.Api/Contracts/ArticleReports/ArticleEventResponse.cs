@@ -1,10 +1,9 @@
-﻿using NewsLetterReporting.Api.Entities;
+﻿namespace NewsLetter.Api.Contracts.ArticleReports;
 
-namespace NewsLetterReporting.Api.Contracts;
-
-public record ArticleEventResponse
+public class ArticleEventResponse
 {
 	public Guid Id { get; init; }
 	public DateTime CreatedOnUtc { get; init; }
+
 	public ArticleEventType EventType { get; init; }
 }

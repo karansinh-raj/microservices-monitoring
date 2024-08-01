@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 services:
   newsletter-db:
@@ -21,8 +21,8 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
       interval: 30s
-      timeout: 10s
-      retries: 5
+      timeout: 20s
+      retries: 10
     volumes:
       - ./.containers/queue/data/:/var/lib/rabbitmq
       - ./.containers/queue/log/:/var/log/rabbitmq
@@ -59,4 +59,3 @@ services:
     container_name: Newsletter.Dashboard
     ports:
       - 18888:18888
-

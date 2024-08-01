@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using NewsLetter.Api.Data;
+using NewsLetter.Api.Middlewares;
 
 namespace NewsLetter.Api.DependencyInjection;
 
@@ -25,8 +26,8 @@ public static class WebApplicationExtensions
 		app.UseSwagger();
 		app.UseSwaggerUI();
 
-		// Https redirection
-		app.UseHttpsRedirection();
+		// Request logging
+		app.UseMiddleware<RequestLoggingMiddleware>();
 
 		// Global exception handler
 		app.UseExceptionHandler();

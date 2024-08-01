@@ -44,6 +44,13 @@ public class ArticlesService(
 			context.Headers.Set("correlationId", correlationId);
 		}, cancellationToken);
 
+		// Update the article create count matrices
+		DiagnosticsConfig.ArticlesCreateCounter.Add(
+			1,
+			new KeyValuePair<string, object?>("articles.id", article.Id.ToString()),
+			new KeyValuePair<string, object?>("articles.title", article.Title),
+			new KeyValuePair<string, object?>("articles.created_date", article.CreatedOnUtc.ToShortDateString()));
+
 		return mapper.Map<ArticleResponse>(article);
 	}
 
