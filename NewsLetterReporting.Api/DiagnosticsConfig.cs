@@ -1,4 +1,6 @@
-﻿namespace NewsLetterReporting.Api;
+﻿using System.Diagnostics;
+
+namespace NewsLetterReporting.Api;
 
 public static class DiagnosticsConfig
 {

@@ -25,9 +25,6 @@ public static class WebApplicationExtensions
 		app.UseSwagger();
 		app.UseSwaggerUI();
 
-		// Https redirection
-		app.UseHttpsRedirection();
-
 		// Global exception handler
 		app.UseExceptionHandler();
 

@@ -26,9 +26,6 @@ public static class WebApplicationExtensions
 		app.UseSwagger();
 		app.UseSwaggerUI();
 
-		// Https redirection
-		app.UseHttpsRedirection();
-
 		// Request logging
 		app.UseMiddleware<RequestLoggingMiddleware>();
 

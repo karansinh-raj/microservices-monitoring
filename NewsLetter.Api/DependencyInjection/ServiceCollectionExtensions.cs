@@ -10,6 +10,7 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using System.Net.Http.Headers;
 using System.Reflection;
 
 namespace NewsLetter.Api.DependencyInjection;
@@ -75,6 +76,12 @@ public static class ServiceCollectionExtensions
 
 		// Add open telemetry services
 		services.AddOpenTelemetryServices();
+
+		services.AddHttpClient<NewsletterReportingApiClient>(client =>
+		{
+			var baseUrl = configuration["NewsletterReportingApi:BaseUrl"];
+			client.BaseAddress = new Uri(baseUrl!);
+		});
 
 		return services;
 	}
