@@ -64,15 +64,9 @@ public static class ServiceCollectionExtensions
 		services.AddExceptionHandler<GlobalExceptionHandler>();
 		services.AddProblemDetails();
 
-		// Http context accessor for Correlation Id
-		services.AddHttpContextAccessor();
-
 		// Add health checks for RabbitMQ
 		services.AddHealthChecks()
-		.AddRabbitMQ(options =>
-		{
-			options.ConnectionUri = new Uri(configuration["MessageBroker:Host"]!);
-		});
+		.AddRabbitMQ(options => options.ConnectionUri = new Uri(configuration["MessageBroker:Host"]!));
 
 		// Add open telemetry services
 		services.AddOpenTelemetryServices();

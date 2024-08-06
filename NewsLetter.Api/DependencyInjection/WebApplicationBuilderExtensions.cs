@@ -16,7 +16,6 @@ public static class WebApplicationBuilderExtensions
 				logging.IncludeScopes = true;
 
 				logging
-					//.AddConsoleExporter()
 					.AddOtlpExporter();
 			});
 
