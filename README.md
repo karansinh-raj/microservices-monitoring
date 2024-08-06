@@ -51,6 +51,6 @@ Access Swagger for APIs:
 
 - Newsletter API: https://localhost:5101/swagger
 - Newsletter Reporting API: https://localhost:5201/swagger
-- Access Aspire Dashboard: https://localhost:18888/login?t={token}
+- Access Aspire Dashboard: http://localhost:18888/login?t={token}
 
 ### Happy coding! 🚀
