@@ -13,8 +13,7 @@ public class ArticlesService(
 	IArticlesRepository articlesRepository,
 	ILogger<ArticlesService> logger,
 	IMapper mapper,
-	IPublishEndpoint publishEndpoint,
-	IHttpContextAccessor httpContextAccessor) 
+	IPublishEndpoint publishEndpoint) 
 	: IArticlesService
 {
 	public async Task<ErrorOr<ArticleResponse>> CreateArticleAsync(
@@ -38,11 +37,7 @@ public class ArticlesService(
 
 		logger.LogInformation("Sending ArticleCreatedEvent to message queue at {DateTime}", DateTime.UtcNow);
 
-		var correlationId = Guid.TryParse(httpContextAccessor.HttpContext?.Items["CorrelationId"]?.ToString(), out var result) ? result : Guid.Empty;
-		await publishEndpoint.Publish(articleCreatedEvent, context =>
-		{
-			context.Headers.Set("correlationId", correlationId);
-		}, cancellationToken);
+		await publishEndpoint.Publish(articleCreatedEvent,cancellationToken);
 
 		// Update the article create count matrices
 		DiagnosticsConfig.ArticlesCreateCounter.Add(
@@ -82,11 +77,7 @@ public class ArticlesService(
 
 		logger.LogInformation("Sending ArticleViewedEvent to message queue at {DateTime}", DateTime.UtcNow);
 
-		var correlationId = Guid.TryParse(httpContextAccessor.HttpContext?.Items["CorrelationId"]?.ToString(), out var result) ? result : Guid.Empty;
-		await publishEndpoint.Publish(articleViewedEvent, context =>
-		{
-			context.Headers.Set("correlationId", correlationId);
-		}, cancellationToken);
+		await publishEndpoint.Publish(articleViewedEvent, cancellationToken);
 
 		return mapper.Map<ArticleResponse>(article);
 	}

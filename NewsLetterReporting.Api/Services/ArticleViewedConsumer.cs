@@ -13,10 +13,6 @@ public class ArticleViewedConsumer(
 {
 	public async Task Consume(ConsumeContext<ArticleViewedEvent> context)
 	{
-		// Access the correlation ID from the message headers
-		var correlationId = context.Headers.Get<string>("correlationId");
-		//Serilog.Context.LogContext.PushProperty("CorrelationId", correlationId);
-
 		logger.LogInformation("Received request for ArticleViewedConsumer with message data: {MessageData}",
 			context.Message);
 
